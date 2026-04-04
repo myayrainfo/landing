@@ -37,32 +37,32 @@ const proofPoints = [
 const teamMembers = [
   {
     name: "Biswajeet Rout",
-    role: "Product Strategy",
-    photo: "https://i.pravatar.cc/320?img=12",
+    role: "Project Architecture",
+    photo: "/assets/team/Biswajeet-Rout.jpeg",
     accent: "from-[#ffd4c8] to-[#fff2ec]",
   },
   {
     name: "Ashutosh Pradhan",
-    role: "Implementation Lead",
-    photo: "https://i.pravatar.cc/320?img=32",
+    role: "AI Engineer",
+    photo: "/assets/team/Ashutosh-Pradhan.jpeg",
     accent: "from-[#d7e7ff] to-[#f2f7ff]",
   },
   {
     name: "Neeladri Bijay Misra",
-    role: "Customer Success",
-    photo: "https://i.pravatar.cc/320?img=47",
+    role: "Project Coordination Head",
+    photo: "/assets/team/Neeladri-Bijay-Misra.jpeg",
     accent: "from-[#d9fff2] to-[#effff8]",
   },
   {
     name: "Monideepa Kar",
-    role: "Solutions Architect",
-    photo: "https://i.pravatar.cc/320?img=15",
+    role: "Lead Developer",
+    photo: "/assets/team/Monideepa-Kar.jpeg",
     accent: "from-[#ffe8bf] to-[#fff7ea]",
   },
   {
     name: "Ishita Paul",
-    role: "Operations Design",
-    photo: "https://i.pravatar.cc/320?img=25",
+    role: "Customer Relation",
+    photo: "/assets/team/Ishita-Paul.jpeg",
     accent: "from-[#ecd9ff] to-[#f8f1ff]",
   },
 ];
@@ -209,5 +209,6 @@ export default function AboutPage() {
     </div>
   );
 }
+
 
 
