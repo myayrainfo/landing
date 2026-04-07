@@ -37,22 +37,22 @@ const proofPoints = [
 const teamMembers = [
   {
     name: "Biswajeet Rout",
-    role: "Project Architecture",
+    role: "Product Engineer",
     photo: "/assets/team/Biswajeet-Rout.jpeg",
     accent: "from-[#ffd4c8] to-[#fff2ec]",
   },
   {
     name: "Ashutosh Pradhan",
-    role: "AI Engineer",
+    role: "AI Eng. and Data Lead",
     photo: "/assets/team/Ashutosh-Pradhan.jpeg",
     accent: "from-[#d7e7ff] to-[#f2f7ff]",
   },
   {
     name: "Neeladri Bijay Misra",
-    role: "Project Coordination Head",
+    role: "Project Head",
     photo: "/assets/team/Neeladri-Bijay-Misra.jpeg",
     accent: "from-[#d9fff2] to-[#effff8]",
-  },
+  }, 
   {
     name: "Monideepa Kar",
     role: "Lead Developer",
@@ -68,11 +68,11 @@ const teamMembers = [
 ];
 
 const orbitSlots = [
-  { x: 0, y: 0, scale: 1, opacity: 1, z: 50, blur: 0 },
-  { x: 170, y: -74, scale: 0.84, opacity: 0.62, z: 30, blur: 0.4 },
-  { x: 138, y: 116, scale: 0.8, opacity: 0.5, z: 20, blur: 0.8 },
-  { x: -138, y: 116, scale: 0.8, opacity: 0.5, z: 20, blur: 0.8 },
-  { x: -170, y: -74, scale: 0.84, opacity: 0.62, z: 30, blur: 0.4 },
+  { x: 100, y: 160, scale: 1, opacity: 1, z: 50, blur: 0, rotate: 0 },
+  { x: 240, y: 80, scale: 0.74, opacity: 0.62, z: 30, blur: 0.4, rotate: 10 },
+  { x: 240, y: 240, scale: 0.66, opacity: 0.5, z: 20, blur: 0.8, rotate: 5 },
+  { x: -40, y: 240, scale: 0.66, opacity: 0.5, z: 20, blur: 0.8, rotate: -5 },
+  { x: -40, y: 80, scale: 0.74, opacity: 0.62, z: 30, blur: 0.4, rotate: -10 },
 ];
 
 export default function AboutPage() {
@@ -167,39 +167,52 @@ export default function AboutPage() {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="absolute left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/60 bg-[radial-gradient(circle,rgba(216,236,255,0.55)_0%,rgba(255,255,255,0)_70%)]" />
-            <div className="absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d7c3]/70" />
+            <div className="absolute left-1/2 top-1/2 h-[330px] w-[330px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/60 bg-[radial-gradient(circle,rgba(216,236,255,0.55)_0%,rgba(255,255,255,0)_70%)]" />
+            <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d7c3]/70" />
 
-            <div className="relative mx-auto h-[500px] max-w-[520px]">
+            <div className="relative mx-auto h-[430px] max-w-[430px]">
               {teamMembers.map((member, index) => {
                 const relativeIndex = (index - activeIndex + teamMembers.length) % teamMembers.length;
                 const slot = orbitSlots[relativeIndex];
                 const isFocused = relativeIndex === 0;
 
                 return (
-                  <article
+                  <div
                     key={member.name}
-                    className="absolute left-1/2 top-1/2 w-[210px] -translate-x-1/2 -translate-y-1/2 rounded-[2rem] border border-white/80 bg-white/78 p-4 shadow-[0_24px_60px_rgba(27,36,48,0.12)] backdrop-blur-xl transition-all duration-700 ease-out"
+                    className="absolute left-1/2 top-1/2 w-[176px] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out sm:w-[188px]"
                     style={{
-                      transform: `translate(-50%, -50%) translate(${slot.x}px, ${slot.y}px) scale(${slot.scale})`,
+                      transform: `translate(-50%, -50%) translate(${slot.x}px, ${slot.y}px) rotate(${slot.rotate}deg) scale(${slot.scale})`,
                       opacity: slot.opacity,
                       zIndex: slot.z,
                       filter: `blur(${slot.blur}px)`,
-                      animation: `float ${isFocused ? 5.6 : 7.2}s ease-in-out infinite`,
+                      willChange: "transform, opacity, filter",
                     }}
                   >
-                    <div className={`rounded-[1.5rem] bg-gradient-to-br ${member.accent} p-3`}>
-                      <img
-                        src={member.photo}
-                        alt={member.name}
-                        className="h-48 w-full rounded-[1.25rem] object-cover"
-                      />
+                    <div
+                      className="rounded-[2rem] border border-white/80 bg-white/78 p-4 shadow-[0_24px_60px_rgba(27,36,48,0.12)] backdrop-blur-xl"
+                      style={{
+                        animation: `float ${isFocused ? 5.6 : 7.2}s ease-in-out infinite`,
+                        willChange: "transform",
+                      }}
+                    >
+                      <div className={`rounded-[1.5rem] bg-gradient-to-br ${member.accent} p-3`}>
+                        <img
+                          src={member.photo}
+                          alt={member.name}
+                          className="h-36 w-full rounded-[1.25rem] object-cover sm:h-40"
+                          loading="eager"
+                          decoding="async"
+                          fetchPriority={isFocused ? "high" : "auto"}
+                          width="840"
+                          height="960"
+                        />
+                      </div>
+                      <div className="px-1 pb-1 pt-4">
+                        <p className="font-headline text-xl font-bold text-[#131b2e]">{member.name}</p>
+                        <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[#6d7683]">{member.role}</p>
+                      </div>
                     </div>
-                    <div className="px-1 pb-1 pt-4">
-                      <p className="font-headline text-xl font-bold text-[#131b2e]">{member.name}</p>
-                      <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[#6d7683]">{member.role}</p>
-                    </div>
-                  </article>
+                  </div>
                 );
               })}
             </div>
@@ -209,6 +222,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-
-
